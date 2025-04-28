@@ -82,6 +82,12 @@ body {
     position: sticky;
     background-color: transparent;
     top: 0;
+    font-weight: 900;
+}
+.title-container h3 {
+    font-size: 2.5rem;
+    color: #000;
+    font-weight: 700;
 }
 
 /* width */
