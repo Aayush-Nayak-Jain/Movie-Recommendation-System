@@ -2,6 +2,12 @@ import sqlite3
 import hashlib
 import os
 
+
+#This database is a projected database 
+#and is not have been implemented
+#in our program due to no authentication and user management 
+
+
 class MovieRecommendationDB:
     def __init__(self, db_name='movie_recommendation.db'):
         self.db_name = db_name
