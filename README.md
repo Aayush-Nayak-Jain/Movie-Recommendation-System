@@ -41,3 +41,22 @@ Footer:
 
 ![Error in loading image. Plese visit screenshots folder](<Screenshots/Footer links.png>)
 
+Recommendation Algorithm:
+
+This project uses a content-based recommendation algorithm to suggest movies similar to a user-inputted movie. The algorithm employs a "soup-based" approach, combining movie metadata into a single text representation for similarity computation.
+
+Working:
+Soup Creation: Combines movie metadata (e.g., genres, plot, cast, director) into a single text string ("soup") per movie.
+Text Preprocessing: Cleans the soup by lowercasing, removing stop words, and optionally stemming words for consistency.
+Feature Extraction: Converts soups into numerical vectors using TF-IDF to weigh terms by importance.
+Similarity Computation: Calculates cosine similarity between the input movie’s vector and others to measure likeness.
+Recommendation Output: Ranks movies by similarity score and returns the top matches.
+
+Advantages of this algorithm:
+- Cold start friendly.
+- Easy to interpret and implement.
+
+Disadvantages of this algorithm:
+- Model's effectiveness depends on metadata.
+- Ignores user prefrences and watch history.
+- Scalability issues.
