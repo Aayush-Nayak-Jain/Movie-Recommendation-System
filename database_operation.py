@@ -35,19 +35,30 @@ class MovieRecommendationDB:
 
     # User CRUD Operations
     def create_user(self, username, password):
-        """Add new user with hashed password"""
-        with sqlite3.connect(self.db_name) as conn:
-            conn.execute(
-                "INSERT INTO User VALUES (?, ?)",
-                (username, self._hash_password(password))
-            )
+        """Add new user with hashed password. Returns True on success, False if user already exists."""
+        try:
+            with sqlite3.connect(self.db_name) as conn:
+                conn.execute(
+                    "INSERT INTO User VALUES (?, ?)",
+                    (username, self._hash_password(password))
+                )
+            return True
+        except sqlite3.IntegrityError:
+            return False
+        except Exception as e:
+            print("Database error in create_user:", e)
+            return False
     
     def get_user(self, username):
         """Retrieve user by username"""
-        with sqlite3.connect(self.db_name) as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM User WHERE username=?", (username,))
-            return cursor.fetchone()
+        try:
+            with sqlite3.connect(self.db_name) as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM User WHERE username=?", (username,))
+                return cursor.fetchone()
+        except Exception as e:
+            print("Database error in get_user:", e)
+            return None
     
     def delete_user(self, username):
         """Remove user and their search history"""
@@ -58,21 +69,30 @@ class MovieRecommendationDB:
     # Search History Operations (Simplified)
     def log_search(self, username, movie):
         """Record a movie search (just username and movie)"""
-        with sqlite3.connect(self.db_name) as conn:
-            conn.execute(
-                "INSERT INTO SearchHistory VALUES (?, ?)",
-                (username, movie)
-            )
+        try:
+            with sqlite3.connect(self.db_name) as conn:
+                conn.execute(
+                    "INSERT INTO SearchHistory VALUES (?, ?)",
+                    (username, movie)
+                )
+            return True
+        except Exception as e:
+            print("Database error in log_search:", e)
+            return False
     
     def get_search_history(self, username):
         """Get all searches for a user"""
-        with sqlite3.connect(self.db_name) as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "SELECT searched_movie FROM SearchHistory WHERE username=?",
-                (username,)
-            )
-            return [row[0] for row in cursor.fetchall()]
+        try:
+            with sqlite3.connect(self.db_name) as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT searched_movie FROM SearchHistory WHERE username=?",
+                    (username,)
+                )
+                return [row[0] for row in cursor.fetchall()]
+        except Exception as e:
+            print("Database error in get_search_history:", e)
+            return []
 
     # Password Hashing
     def _hash_password(self, password):

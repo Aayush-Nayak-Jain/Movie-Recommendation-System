@@ -24,3 +24,6 @@ pip-delete-this-directory.txt
 # Django stuff:
 *.log
 *.pot
+
+# Project documentation / analysis guide
+PROJECT_GUIDE.md
