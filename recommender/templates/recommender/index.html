@@ -92,18 +92,17 @@
                 <div class="formcontainer">
                     <input class="input-field" type="text" id="movie_name" name="movie_name"
                         placeholder="Start typing to see movie suggestions..." required />
+                    <script id="all-movie-names" type="application/json">
+                        {{ all_movie_names|safe }}
+                    </script>
                     <script>
                         $(function () {
-                            var availableTags = [
-                                {% for mmm in all_movie_names %}
-                                "{{ mmm }}",
-                            {% endfor %}
-                        ];
-                        $("#movie_name").autocomplete({
-                            source: availableTags,
-                            minLength: 3
+                            var availableTags = JSON.parse(document.getElementById('all-movie-names').textContent || '[]');
+                            $("#movie_name").autocomplete({
+                                source: availableTags,
+                                minLength: 3
+                            });
                         });
-                    } );
                     </script>
                     <button type="submit" class="submit-button">Search</button>
                 </div>

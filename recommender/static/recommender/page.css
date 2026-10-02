@@ -1,7 +1,7 @@
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -15,6 +15,7 @@ body {
     z-index: 100;
     cursor: none;
     background-image: url('background.png');
+    background-size: cover;
     font-weight: 900;
 }
 
@@ -38,12 +39,12 @@ a {
     justify-content: center;
 }
 
-.two{
+.two {
     flex: 2 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color:black;
+    color: black;
     max-height: 90%;
     max-width: 100%;
     text-align: center;
@@ -64,7 +65,7 @@ a {
     color: black;
 }
 
-.three{
+.three {
     display: flex;
     flex-flow: row wrap;
     flex: 1 1 auto;
@@ -83,7 +84,7 @@ a {
     text-decoration: none;
 }
 
-.social-links-span i{
+.social-links-span i {
     margin: 0rem 0.75rem;
 }
 
@@ -174,11 +175,11 @@ a {
         font-size: 3.5rem;
         font-weight: 750;
     }
-    
+
     .subheading {
         font-size: 2rem;
     }
-    
+
     .message p {
         font-size: 1.6rem;
     }
@@ -220,7 +221,7 @@ a {
     .subheading {
         font-size: 2.5rem;
     }
-    
+
     .message p {
         font-size: 2rem;
     }
