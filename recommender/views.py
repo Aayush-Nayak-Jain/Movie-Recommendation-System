@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 import pandas as pd
 import pyarrow as pa
+import json
 from database_operation import MovieRecommendationDB
 
 db = MovieRecommendationDB()
@@ -11,6 +12,7 @@ db = MovieRecommendationDB()
 movies_data = pd.read_parquet("static/top_2k_movie_data.parquet")
 titles = movies_data['title']
 titles_list = titles.to_list()
+titles_json = json.dumps(titles_list)
 
 def get_recommendations(movie_id_from_db, movie_db):
 
@@ -48,7 +50,7 @@ def main(request):
             request,
             'recommender/index.html',
             {
-                'all_movie_names': titles_list,
+                'all_movie_names': titles_json,
                 'input_provided': '',
                 'movie_found': '',
                 'recomendation_found': '',
@@ -66,7 +68,7 @@ def main(request):
             request,
             'recommender/index.html',
             {
-                'all_movie_names': titles_list,
+                'all_movie_names': titles_json,
                 'input_provided': 'yes',
                 'movie_found': '',
                 'recomendation_found': '',
@@ -86,7 +88,7 @@ def main(request):
             request,
             'recommender/result.html',
             {
-                'all_movie_names': titles_list,
+                'all_movie_names': titles_json,
                 'input_provided': 'yes',
                 'movie_found': 'yes',
                 'recomendation_found': 'yes',
@@ -99,7 +101,7 @@ def main(request):
             request,
             'recommender/index.html',
             {
-                'all_movie_names': titles_list,
+                'all_movie_names': titles_json,
                 'input_provided': 'yes',
                 'movie_found': '',
                 'recomendation_found': '',
