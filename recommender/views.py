@@ -17,7 +17,7 @@ titles_json = json.dumps(titles_list)
 def get_recommendations(movie_id_from_db, movie_db):
 
     try:
-        sim_scores = list(enumerate(movie_db[movie_id_from_db]))
+        sim_scores = list(enumerate(movie_db[str(movie_id_from_db)]))
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
         sim_scores = sim_scores[1:16] ## get top 15 Recommendations
         
